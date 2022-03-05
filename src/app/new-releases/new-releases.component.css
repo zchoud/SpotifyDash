@@ -1,0 +1,5 @@
+.mat-chip-list {
+    display: inline-flex;
+    flex-direction: row;
+    margin: 5px 10px;
+}

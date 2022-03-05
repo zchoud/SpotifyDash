@@ -1,0 +1,38 @@
+<mat-card>
+    <mat-card-content fxLayout="row wrap" fxLayout.xs="column">
+        <div fxflex><img src={{this.album.images[1].url}} alt="album cover" [style.margin]="'10px'" [style.max-width]="'90%'" /></div>
+        <div fxFlex>
+            <div [style.min-width]="'300px'" [style.margin]="'10px'">
+                <strong>Record Label: </strong> {{this.album.label}}<br />
+                <strong>Release Date: </strong> {{this.album.release_date}}<br /><br />
+                <strong>Tracks:</strong> {{this.album.total_tracks}}<br />
+                <strong>Popularity: </strong>{{this.album.popularity}}<br /><br />
+
+                <mat-chip-list aria-label="Artist selection" *ngFor="let artist of this.album.artists">
+                    <mat-chip [routerLink]="['/artist']">{{artist.name}}</mat-chip>
+                </mat-chip-list>
+                <br />
+
+                <div *ngFor="let copyright of this.album.copyrights">
+                    <div>{{copyright.text}}</div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<br /><br />
+<h2>Track Listing</h2>
+
+<mat-list *ngFor="let item of this.album.tracks.items; let i = index;">
+    <!-- Single "Responsive" Material List Item-->
+    <mat-list-item>
+        <mat-icon mat-list-icon>queue_music</mat-icon>
+        <div mat-line>
+            <mat-card>
+                <mat-card-content>{{i + 1}}: {{item.name}} - {{[getTime(item.duration_ms)]}}
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-list-item>
+    <!-- -->
+</mat-list>
