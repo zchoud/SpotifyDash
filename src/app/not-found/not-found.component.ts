@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
 
+  "assets": [
+    '../../assets/number-4-svgrepo-com.svg',
+    '../../assets/Aj_Simple_Turntable_clip_art.svg'
+  ]
+
   constructor() { }
 
   ngOnInit(): void {
