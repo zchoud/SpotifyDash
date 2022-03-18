@@ -25,6 +25,7 @@ export class NewReleasesComponent implements OnInit {
 
   goToArtist(): void{
     this._router.navigateByUrl('/artist');
+    document.getElementById
   }
 
 }
