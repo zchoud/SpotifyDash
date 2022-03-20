@@ -9,9 +9,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   // { [path: '', component: SomeComponent} in order of specific to less
-  { path: 'album', component: AlbumComponent },
+  { path: 'album/:id', component: AlbumComponent },
   { path: 'new-releases', component: NewReleasesComponent },
-  { path: 'artist', component: ArtistDiscographyComponent },
+  { path: 'artist/:id', component: ArtistDiscographyComponent },
   { path: 'about', component: AboutComponent },
   { path: '', redirectTo: '/new-releases', pathMatch: 'full'},
   { path: '404', component: NotFoundComponent},
@@ -20,6 +20,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-exports: [RouterModule]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

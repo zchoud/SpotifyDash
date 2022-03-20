@@ -34,7 +34,7 @@ export class MusicDataService {
 
   getAlbumById(id:string): Observable<SpotifyApi.SingleAlbumResponse>{
     return this.spotifyToken.getBearerToken().pipe(mergeMap(token => {
-      return this.http.get<SpotifyApi.SingleAlbumResponse>(`https://api.spotify.com/v1/albums/${id}/albums`, { headers: { "Authorization": `Bearer ${token}` } });
+      return this.http.get<SpotifyApi.SingleAlbumResponse>(`https://api.spotify.com/v1/albums/${id}`, { headers: { "Authorization": `Bearer ${token}` } });
     }));
   }
 

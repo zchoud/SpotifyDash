@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import data from '../data/NewReleasesAlbums.json';
 import { MusicDataService } from '../music-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-releases',
@@ -11,24 +12,29 @@ import { MusicDataService } from '../music-data.service';
 export class NewReleasesComponent implements OnInit {
 
   releases: Array<any> = [];
+  dataSub: Subscription = new Subscription;
 
   constructor(private _router: Router, private musicService: MusicDataService) {
     this.releases = [];
    }
 
   ngOnInit(): void {
-    this.musicService.getNewReleases().subscribe(data => {
+    this.dataSub = this.musicService.getNewReleases().subscribe(data => {
       this.releases = data.albums.items;
     });
   }
 
-  goToAlbum(): void{
-    this._router.navigateByUrl('/album');
+  goToAlbum(id:string): void{
+    this._router.navigateByUrl(`/album/${id}`);
   }
 
-  goToArtist(): void{
-    this._router.navigateByUrl('/artist');
-    document.getElementById
+  goToArtist(id:string): void{
+    this._router.navigateByUrl(`/artist/${id}`);
+  }
+
+  ngOnDestroy(){
+    //conditional chaining if dataSub exists then unsubscribe
+    this.dataSub?.unsubscribe();
   }
 
 }
