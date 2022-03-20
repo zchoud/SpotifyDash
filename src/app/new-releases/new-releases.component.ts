@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import data from '../data/NewReleasesAlbums.json';
+import { MusicDataService } from '../music-data.service';
 
 @Component({
   selector: 'app-new-releases',
@@ -9,14 +10,16 @@ import data from '../data/NewReleasesAlbums.json';
 })
 export class NewReleasesComponent implements OnInit {
 
-  releases: Array<typeof data.albums.items[0]>;
+  releases: Array<any> = [];
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private musicService: MusicDataService) {
     this.releases = [];
    }
 
   ngOnInit(): void {
-    this.releases = data.albums.items
+    this.musicService.getNewReleases().subscribe(data => {
+      this.releases = data.albums.items;
+    });
   }
 
   goToAlbum(): void{
