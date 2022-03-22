@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import albumData from '../data/SearchResultsAlbums.json';
-import artistData from '../data/SearchResultsArtist.json';
+import { ActivatedRoute } from "@angular/router";
+import albumData from '../data/SearchResultsAlbums.json'
+import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { MusicDataService } from './../music-data.service';
 
 @Component({
   selector: 'app-artist-discography',
@@ -11,21 +13,35 @@ import artistData from '../data/SearchResultsArtist.json';
 })
 export class ArtistDiscographyComponent implements OnInit {
 
-  artist: typeof artistData;
-  albums: Array<typeof albumData.items[0]> = [];
+  paramSub: Subscription = new Subscription;  
+  artistSub: Subscription = new Subscription;  
+  albumsSub: Subscription = new Subscription;  
+  id: string= "";
+  artist: SpotifyApi.SingleArtistResponse = {} as SpotifyApi.SingleArtistResponse;
+  albums: SpotifyApi.ArtistsAlbumsResponse = {} as SpotifyApi.ArtistsAlbumsResponse;
 
-  constructor(private _router: Router) {
-    this.artist = artistData;
+  constructor(private _router: Router, private $route: ActivatedRoute, private musicService: MusicDataService) {
   }
 
   ngOnInit(): void {
-    this.artist = artistData;
-    this.albums = albumData.items.filter((curValue, index, self) => self.findIndex(t => t.name.toUpperCase() === curValue.name.toUpperCase()) === index);
-    console.log(this.albums);
+    this.paramSub = this.$route.params.subscribe(para => {
+      this.id = para["id"];
+    });
+    this.artistSub = this.musicService.getArtistById(this.id).subscribe(data => {
+      this.artist = data;
+    });
+    this.albumsSub = this.musicService.getAlbumsByArtistId(this.id).subscribe(data => {
+      this.albums = data;
+    });
   }
 
-  goToAlbum(): void{
-    this._router.navigateByUrl('/album');
+  goToAlbum(id:any): void{
+    this._router.navigateByUrl(`/album/${id}`);
   }
 
+  ngOnDestroy(){
+    this.paramSub.unsubscribe();
+    this.albumsSub.unsubscribe();
+    this.artistSub.unsubscribe();
+  }
 }

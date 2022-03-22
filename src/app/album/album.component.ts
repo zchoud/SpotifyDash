@@ -17,17 +17,35 @@ export class AlbumComponent implements OnInit {
   albumsSub: Subscription = new Subscription;  
   id: string= "";
   album: SpotifyApi.SingleAlbumResponse = {} as SpotifyApi.SingleAlbumResponse;
+  icon: boolean = false;
 
   constructor(private matSnack:MatSnackBar, private $route: ActivatedRoute, private musicService: MusicDataService) { 
    }
 
   ngOnInit(): void {
     this.paramSub = this.$route.params.subscribe(para => {
-      this.id = para["id"].substring(1, para["id"].length);
+      this.id = para["id"];
     });
     this.albumsSub = this.musicService.getAlbumById(this.id).subscribe(data => {
       this.album = data;
     })
+  }
+
+  addToFavourites(trackID:string):void{
+    if(this.musicService.addToFavourites(trackID)){
+      this.matSnack.open("Adding to Favourites...", "Done.", {duration: 1500});
+    }
+  }
+
+  changeIcon(id:string):void{
+    var star = "star_rate";
+    var music = "queue_music";
+    const icon = document.getElementById(`icon-${id}`);
+    if(icon){
+      this.icon ? icon.innerHTML = music : icon.innerHTML = star;
+    } 
+    this.icon = !this.icon;
+    //star_rate
   }
 
   //return time in min:sec format given a ms time

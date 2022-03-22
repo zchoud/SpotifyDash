@@ -22,7 +22,7 @@ export class MusicDataService {
 
   getArtistById(id:string): Observable<SpotifyApi.SingleArtistResponse>{
     return this.spotifyToken.getBearerToken().pipe(mergeMap(token => {
-      return this.http.get<SpotifyApi.SingleArtistResponse>(`https://api.spotify.com/v1/artists/${id}/albums`, { headers: { "Authorization": `Bearer ${token}` } });
+      return this.http.get<SpotifyApi.SingleArtistResponse>(`https://api.spotify.com/v1/artists/${id}`, { headers: { "Authorization": `Bearer ${token}` } });
     }));
   }
 
@@ -44,10 +44,11 @@ export class MusicDataService {
     }));
   }
 
-  addToFavourites(id:number):boolean{
+  addToFavourites(id:string):boolean{
     var added = false;
     if(id && this.favoritesList.length < 50){
       this.favoritesList.push(id);
+      added = true;
     }
     return added;
   }
