@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-content fxLayout="row wrap" fxLayout.xs="column">
-        <div fxflex><img src={{this.album.images[1].url}} alt="album cover" [style.margin]="'10px'" [style.max-width]="'90%'" /></div>
+        <div fxflex *ngIf="this.album.images"><img src={{this.album.images[1].url}} alt="album cover" [style.margin]="'10px'" [style.max-width]="'90%'" /></div>
         <div fxFlex>
             <div [style.min-width]="'300px'" [style.margin]="'10px'">
                 <strong>Record Label: </strong> {{this.album.label}}<br />

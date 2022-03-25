@@ -8,6 +8,7 @@
  * * ********************************************************************************/
 
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,9 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'web422-a4';
   menuState: boolean = false;
+  searchString: string = "";
 
-  constructor(){
+  constructor(private _route: Router){
     this.menuState = false;
   }
 
@@ -29,6 +31,13 @@ export class AppComponent implements OnInit {
 
   menuToggle(): void{
     this.menuState = !this.menuState;    
+  }
+
+  handleSearch():void{
+    if(this.searchString){
+      this._route.navigate(['/search'], {queryParams: {q: this.searchString}});
+      this.searchString = "";
+    }
   }
 
 }

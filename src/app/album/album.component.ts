@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import data from '../data/SearchResultsAlbum.json';
@@ -11,7 +11,7 @@ import { MusicDataService } from './../music-data.service';
   templateUrl: './album.component.html',
   styleUrls: ['./album.component.css']
 })
-export class AlbumComponent implements OnInit {
+export class AlbumComponent implements OnInit, OnDestroy {
 
   paramSub: Subscription = new Subscription;  
   albumsSub: Subscription = new Subscription;  

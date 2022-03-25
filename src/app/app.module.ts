@@ -26,7 +26,9 @@ import { NewReleasesComponent } from './new-releases/new-releases.component';
 //a5
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { FavoiritesComponent } from './favoirites/favoirites.component'
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
     NotFoundComponent,
     AlbumComponent,
     ArtistDiscographyComponent,
-    NewReleasesComponent
+    NewReleasesComponent,
+    SearchResultComponent,
+    FavoiritesComponent
   ],
   imports: [
     BrowserModule,

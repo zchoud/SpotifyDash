@@ -1,0 +1,8 @@
+mat-list mat-icon:hover {
+    cursor: pointer;
+}
+
+mat-chip a {
+    text-decoration: none;
+    color: black;
+}

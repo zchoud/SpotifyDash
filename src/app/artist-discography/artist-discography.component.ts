@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import albumData from '../data/SearchResultsAlbums.json'
@@ -11,7 +11,7 @@ import { MusicDataService } from './../music-data.service';
   templateUrl: './artist-discography.component.html',
   styleUrls: ['./artist-discography.component.css']
 })
-export class ArtistDiscographyComponent implements OnInit {
+export class ArtistDiscographyComponent implements OnInit, OnDestroy {
 
   paramSub: Subscription = new Subscription;  
   artistSub: Subscription = new Subscription;  
