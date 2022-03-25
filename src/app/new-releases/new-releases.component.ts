@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import data from '../data/NewReleasesAlbums.json';
 import { MusicDataService } from '../music-data.service';
 import { Subscription } from 'rxjs';
 

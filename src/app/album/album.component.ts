@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import data from '../data/SearchResultsAlbum.json';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { MusicDataService } from './../music-data.service';
