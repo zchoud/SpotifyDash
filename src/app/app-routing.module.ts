@@ -6,13 +6,17 @@ import { AlbumComponent } from './album/album.component';
 import { AboutComponent } from './about/about.component';
 import { ArtistDiscographyComponent } from './artist-discography/artist-discography.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { FavoiritesComponent } from './favoirites/favoirites.component';
 
 const routes: Routes = [
   // { [path: '', component: SomeComponent} in order of specific to less
-  { path: 'album', component: AlbumComponent },
+  { path: 'album/:id', component: AlbumComponent },
   { path: 'new-releases', component: NewReleasesComponent },
-  { path: 'artist', component: ArtistDiscographyComponent },
+  { path: 'artist/:id', component: ArtistDiscographyComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'favorites', component: FavoiritesComponent },
+  { path: 'search', component: SearchResultComponent },
   { path: '', redirectTo: '/new-releases', pathMatch: 'full'},
   { path: '404', component: NotFoundComponent},
   { path: '**', redirectTo: '/404'}
@@ -20,6 +24,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-exports: [RouterModule]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

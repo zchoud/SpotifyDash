@@ -8,12 +8,12 @@
                     <mat-card-title>{{this.release.name}}</mat-card-title>
                     <mat-card-subtitle>New Release</mat-card-subtitle>
                 </mat-card-header>
-                <img mat-card-image class="album-cover" src={{this.release.images[1].url}} alt="album art" (click)="goToAlbum()">
+                <img mat-card-image class="album-cover" src={{this.release.images[1].url}} alt="album art" (click)="goToAlbum(this.release.id)">
                 <strong>Release Date: </strong>{{this.release.release_date}}<br />
                 <strong>Tracks: </strong>{{this.release.total_tracks}}<br /><br />
                 <mat-card-content>
                     <mat-chip-list aria-label="Artist selection" *ngFor="let artist of this.release.artists">
-                        <mat-chip>{{artist.name}}</mat-chip>
+                        <mat-chip (click)="goToArtist(artist.id)">{{artist.name}}</mat-chip>
                     </mat-chip-list>
                 </mat-card-content>
             </mat-card>

@@ -1,5 +1,5 @@
 <h1>{{this.artist.name}}</h1>
-<mat-card [style.background]="'url(' + this.artist.images[1].url + ') no-repeat center center'" [style.background-size]="'cover'" [style.height]="'450px'">
+<mat-card *ngIf="this.artist.images" [style.background]="'url(' + this.artist.images[0]?.url + ') no-repeat center center'" [style.height]="'450px'" [style.background-size]="'cover'">
 </mat-card>
 <br /><br />
 <h1>Full Discography</h1>
@@ -7,16 +7,16 @@
 <div id="album-list" fxLayout="row wrap" fxLayout.xs="row">
 
     <!-- Single "Responsive" Card-->
-    <div fxFlex [style.margin]="'20px'" *ngFor="let album of this.albums">
+    <div fxFlex [style.margin]="'20px'" *ngFor="let album of this.albums.items">
         <mat-card [style.min-width]="'200px'">
             <mat-card-header>
                 <mat-card-title>{{album.name}}</mat-card-title>
                 <mat-card-subtitle>Album Title</mat-card-subtitle>
             </mat-card-header>
 
-            <img mat-card-image class="album-cover" src={{album.images[1].url}} alt="album art" (click)="goToAlbum()">
-            <strong>Release Date: </strong>2021/02/12<br />
-            <strong>Tracks: </strong>22
+            <img mat-card-image class="album-cover" src={{album.images[1].url}} alt="album art" (click)="goToAlbum(album.id)">
+            <strong>Release Date: </strong>{{album.release_date}}<br />
+            <strong>Tracks: </strong>{{album.total_tracks}}
         </mat-card>
     </div>
     <!-- -->

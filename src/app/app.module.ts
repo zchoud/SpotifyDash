@@ -23,6 +23,13 @@ import { AlbumComponent } from './album/album.component';
 import { ArtistDiscographyComponent } from './artist-discography/artist-discography.component';
 import { NewReleasesComponent } from './new-releases/new-releases.component';
 
+//a5
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { FavoiritesComponent } from './favoirites/favoirites.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +37,9 @@ import { NewReleasesComponent } from './new-releases/new-releases.component';
     NotFoundComponent,
     AlbumComponent,
     ArtistDiscographyComponent,
-    NewReleasesComponent
+    NewReleasesComponent,
+    SearchResultComponent,
+    FavoiritesComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +56,10 @@ import { NewReleasesComponent } from './new-releases/new-releases.component';
     MatInputModule,
     MatCardModule,
     MatChipsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule,
+    FormsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
