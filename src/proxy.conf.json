@@ -1,0 +1,6 @@
+{
+    "/api": {
+        "target": "https://auth-express-a6.herokuapp.com",
+        "secure": false
+    }
+}

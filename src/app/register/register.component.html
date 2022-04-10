@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-content>
+        <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
+            <h2>Register</h2>
+            <mat-error *ngIf="this.warning !== ''">{{this.warning}}</mat-error><br />
+            <mat-form-field class="full-width-input">
+                <input [(ngModel)]="registerUser.userName" #registerForm="ngModel" matInput placeholder="User Name" required name="username" autofocus>
+                <mat-error>Please provide a valid user name</mat-error>
+            </mat-form-field><br />
+            <mat-form-field class="full-width-input">
+                <input [(ngModel)]="registerUser.password" #registerForm="ngModel" matInput type="password" required placeholder="Password" name="password" (change)="validPass(registerForm.value.password)">
+                <mat-error>Please provide a valid password</mat-error>
+            </mat-form-field><br />
+            <mat-form-field class="full-width-input">
+                <input matInput [(ngModel)]="registerUser.password2" #registerForm="ngModel" type="password" required placeholder="Password" name="password2">
+                <mat-error>Please provide a valid password</mat-error>
+            </mat-form-field><br />
+            <button (click)="onSubmit(registerForm)" type="submit" name="submit" mat-raised-button color="primary" [disabled]="this.loading">
+                    <mat-icon>account_box</mat-icon>
+                    <span>&nbsp;&nbsp;&nbsp;Register</span>
+            </button>
+            <br /><br /><br />
+            <mat-progress-bar *ngIf="this.loading" mode='indeterminate'></mat-progress-bar>
+        </form>
+    </mat-card-content>
+</mat-card>

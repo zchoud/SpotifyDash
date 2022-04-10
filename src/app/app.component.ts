@@ -8,7 +8,8 @@
  * * ********************************************************************************/
 
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -20,13 +21,34 @@ export class AppComponent implements OnInit {
   title = 'web422-a4';
   menuState: boolean = false;
   searchString: string = "";
+  token:any = null;
 
-  constructor(private _route: Router){
+  constructor(private _route: Router, private auth: AuthService){
     this.menuState = false;
   }
 
   ngOnInit(): void {
     this.menuState = false;
+    this._route.events.subscribe({
+      next: (event) => {
+        if(event instanceof NavigationStart){
+          this.token = this.auth.readToken();
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  isAuth():boolean{
+    return this.auth.isAuthenticated();
+  }
+
+  logout(){
+    console.log(this.token);
+    localStorage.clear();
+    this._route.navigate(['/login']);
   }
 
   menuToggle(): void{

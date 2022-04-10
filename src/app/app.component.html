@@ -1,4 +1,4 @@
-<div class="navbar-container">
+<div class="navbar-container" *ngIf="isAuth(); else waitAuth">
 
     <!-- Top navbar -->
     <mat-toolbar class="navbar" color="primary">
@@ -7,7 +7,7 @@
       <mat-icon>menu</mat-icon>
     </button>
 
-        <a class="navbar-brand" matTooltip="Home">
+        <a class="navbar-brand" matTooltip="Home" [routerLink]="['/']">
             <h1>
                 Seneca Music
             </h1>
@@ -18,12 +18,12 @@
         <button mat-button [matMenuTriggerFor]="userMenu">
       <mat-icon>person</mat-icon>
       <span fxShow fxHide.xs>
-        User Name
+        {{this.token.userName}}
       </span>
     </button>
         <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
 
-            <a mat-menu-item>
+            <a mat-menu-item (click)="logout()">
                 <mat-icon>exit_to_app</mat-icon>
                 <span>Log out</span>
             </a>
@@ -72,9 +72,35 @@
         </mat-sidenav>
 
         <mat-sidenav-content class="sidenav-content" (click)="menuState && snav.toggle() && menuToggle()">
-            <div id="div-router">
-                <router-outlet></router-outlet>
-            </div>
+            <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>
+
+<ng-template #waitAuth>
+    <div class="navbar-container">
+
+        <!-- Top navbar -->
+        <mat-toolbar class="navbar" color="primary">
+
+            <a class="navbar-brand" matTooltip="Home">
+                <h1>
+                    Seneca Music
+                </h1>
+            </a>
+
+            <span class="navbar-spacer"></span>
+
+            <div mat-menu-item>
+                <a mat-raised-button color="accent" [routerLink]="['/login']">
+                    <mat-icon>login</mat-icon>&nbsp;&nbsp;&nbsp;Login
+                </a>
+            </div>
+
+        </mat-toolbar>
+        <div id="div-router">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</ng-template>

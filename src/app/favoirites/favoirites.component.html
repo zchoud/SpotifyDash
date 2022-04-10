@@ -11,15 +11,32 @@
         <mat-icon mat-list-icon mat-list-icon [id]="['icon-'+ track.id]" (mouseover)="changeIcon(track.id);" (mouseleave)="changeIcon(track.id)" (click)="removeFromFavoirites(track.id)">queue_music</mat-icon>
         <div mat-line>
             <mat-card>
-                <mat-card-content><strong>{{track.name}}</strong> - {{getTime(track.duration_ms)}}<br /><br /> Artist(s):
-                    <div *ngFor="let artist of track.artists">
-                        <mat-chip><a [routerLink]="['/artist/', artist.id]">{{artist.name}}</a>&nbsp;&nbsp;</mat-chip>
+                <mat-card-content>
+                    <div class="card">
+                        <div>
+                            <img src={{track.album.images[1].url}} alt="album">
+                        </div>
+                        <div>
+                            <strong>{{track.name}}</strong> - {{getTime(track.duration_ms)}}<br /><br />
+                            <div class="info">
+                                <div>
+                                    Artist(s):
+                                    <div *ngFor="let artist of track.artists">
+                                        <mat-chip><a [routerLink]="['/artist/', artist.id]">{{artist.name}}</a>&nbsp;&nbsp;</mat-chip>
+                                    </div>
+                                </div>
+                                <div>
+                                    Album:
+                                    <br />
+                                    <mat-chip>
+                                        <a [routerLink]="['/album/', track.album.id]">{{track.album.name}}</a>
+                                    </mat-chip>
+                                </div>
+                            </div>
+                            <br />
+                            <div *ngIf="track.preview_url"><br /><audio controls [src]="track.preview_url"></audio></div>
+                        </div>
                     </div>
-                    <br /> Album:<br />
-                    <mat-chip>
-                        <a [routerLink]="['/album/', track.album.id]">{{track.album.name}}</a>
-                    </mat-chip><br />
-                    <div *ngIf="track.preview_url"><br /><audio controls [src]="track.preview_url"></audio></div>
                 </mat-card-content>
 
             </mat-card>
