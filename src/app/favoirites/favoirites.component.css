@@ -6,3 +6,23 @@ mat-chip a {
     text-decoration: none;
     color: black;
 }
+
+.info {
+    display: flex;
+    flex-direction: row;
+    margin-right: 40px;
+}
+
+.info>div {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+}
+
+.card>div {
+    padding-right: 30px;
+}
